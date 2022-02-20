@@ -38,7 +38,7 @@ download_release() {
   if [ "$platform" == "darwin" ]; then
     platform="apple-darwin"
   elif [ "$platform" == "linux" ]; then
-    platform="linux-unknown-gnu"
+    platform="unknown-linux-gnu"
   fi
 
   url="$GH_REPO/releases/download/v$version/$TOOL_NAME-$version-$arch-$platform.zip"
