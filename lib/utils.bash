@@ -44,7 +44,7 @@ download_release() {
     platform="unknown-linux-gnu"
   fi
 
-  url="$GH_REPO/releases/download/v$version/$TOOL_NAME-$version-$arch-$platform.zip"
+  url="$GH_REPO/releases/download/v$version/$TOOL_NAME-v$version-$arch-$platform.zip"
 
   echo "* Downloading $TOOL_NAME release $version..."
   curl "${curl_opts[@]}" -o "$filename" -C - "$url" || fail "Could not download $url"
