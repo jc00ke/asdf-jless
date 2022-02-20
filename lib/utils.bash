@@ -30,11 +30,18 @@ list_all_versions() {
 }
 
 download_release() {
-  local version filename url
+  local version filename url platform arch
+  arch="x86_64"
   version="$1"
   filename="$2"
+  platform="$(get_platform)"
+  if [ "$platform" == "darwin" ]; then
+    platform="apple-darwin"
+  elif [ "$platform" == "linux" ]; then
+    platform="linux-unknown-gnu"
+  fi
 
-  url="$GH_REPO/releases/download/v$version/$TOOL_NAME-$version-$platform.zip"
+  url="$GH_REPO/releases/download/v$version/$TOOL_NAME-$version-$arch-$platform.zip"
 
   echo "* Downloading $TOOL_NAME release $version..."
   curl "${curl_opts[@]}" -o "$filename" -C - "$url" || fail "Could not download $url"
@@ -62,4 +69,8 @@ install_version() {
     rm -rf "$install_path"
     fail "An error ocurred while installing $TOOL_NAME $version."
   )
+}
+
+get_platform() {
+  uname | tr '[:upper:]' '[:lower:]'
 }
