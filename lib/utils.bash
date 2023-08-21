@@ -11,7 +11,7 @@ fail() {
   exit 1
 }
 
-curl_opts=(-fsSL)
+curl_opts=(--fail-with-body -sSL)
 
 if [ -n "${GITHUB_API_TOKEN:-}" ]; then
   curl_opts=("${curl_opts[@]}" -H "Authorization: token $GITHUB_API_TOKEN")
