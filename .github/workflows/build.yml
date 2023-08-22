@@ -16,6 +16,9 @@ jobs:
           - macos-latest
     runs-on: ${{ matrix.os }}
     steps:
+      - name: Install clipboard dependencies
+        if: ${{ matrix.os == 'ubuntu-latest' }}
+        run: sudo apt install -y libxcb-shape0-dev libxcb-xfixes0-dev
       - name: asdf_plugin_test
         uses: asdf-vm/actions/plugin-test@v2
         with:
