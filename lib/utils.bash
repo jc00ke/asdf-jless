@@ -11,7 +11,19 @@ fail() {
   exit 1
 }
 
-curl_opts=(--fail-with-body -sSL)
+version_above(){
+  local _ver=${1}
+  local _than_ver=${2}
+  [  "$_than_ver" = $(echo -e "$_ver\n$_than_ver" | sort -V | head -n1) ]
+}
+
+curl_version=$(curl --version | awk 'FNR==1 {print $2}')
+
+if version_above ${curl_version} '7.76.0'; then
+  curl_opts=(--fail-with-body -sSL)
+else
+  curl_opts=(-fsSL)
+fi
 
 if [ -n "${GITHUB_API_TOKEN:-}" ]; then
   curl_opts=("${curl_opts[@]}" -H "Authorization: token $GITHUB_API_TOKEN")
