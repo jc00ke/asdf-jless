@@ -14,7 +14,7 @@ fail() {
 version_above(){
   local _ver=${1}
   local _than_ver=${2}
-  [  "$_than_ver" = $(echo -e "$_ver\n$_than_ver" | sort -V | head -n1) ]
+  [ "$_than_ver" = $(echo -e "$_ver\n$_than_ver" | sort -V | head -n1) ]
 }
 
 curl_version=$(curl --version | awk 'FNR==1 {print $2}')
