@@ -11,7 +11,7 @@ fail() {
   exit 1
 }
 
-version_above(){
+version_above() {
   local _ver=${1}
   local _than_ver=${2}
   [ "$_than_ver" = $(echo -e "$_ver\n$_than_ver" | sort -V | head -n1) ]
