@@ -11,7 +11,7 @@ fail() {
   exit 1
 }
 
-version_above() {
+version_gte() {
   local _ver=${1}
   local _than_ver=${2}
   [ "$_than_ver" = $(echo -e "$_ver\n$_than_ver" | sort -V | head -n1) ]
@@ -19,7 +19,7 @@ version_above() {
 
 curl_version=$(curl --version | awk 'FNR==1 {print $2}')
 
-if version_above ${curl_version} '7.76.0'; then
+if version_gte ${curl_version} '7.76.0'; then
   curl_opts=(--fail-with-body -sSL)
 else
   curl_opts=(-fsSL)
